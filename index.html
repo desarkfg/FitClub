@@ -16,7 +16,6 @@
   <!-- Embedded Apple Touch Icon -->
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180' width='180' height='180'%3E%3Crect width='180' height='180' rx='40' fill='%23050811'/%3E%3Ccircle cx='90' cy='90' r='75' fill='%230f172a' stroke='%2322c55e' stroke-width='3' stroke-opacity='0.4'/%3E%3Cpath d='M48 68h14v44H48zm70 0h14v44h-14zm-52 8h8v28h-8zm44 0h8v28h-8zm-34 10h30v8H76z' fill='%2322c55e'/%3E%3Ccircle cx='55' cy='90' r='18' fill='none' stroke='%234ade80' stroke-width='4'/%3E%3Ccircle cx='125' cy='90' r='18' fill='none' stroke='%234ade80' stroke-width='4'/%3E%3Ctext x='90' y='145' font-family='sans-serif' font-size='15' font-weight='900' fill='%23ffffff' text-anchor='middle' letter-spacing='1'%3EGYMPRO%3C/text%3E%3C/svg%3E">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%23050811'/%3E%3Cpath d='M26 36h8v28h-8zm40 0h8v28h-8zm-30 6h4v16h-4zm26 0h4v16h-4zm-20 6h18v4H42z' fill='%2322c55e'/%3E%3C/svg%3E">
-  <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22GymPro%20AI%20Training%22%2C%22short_name%22%3A%22GymPro%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23020617%22%2C%22theme_color%22%3A%22%23020617%22%7D">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +24,7 @@
   <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -37,14 +36,9 @@
           },
           colors: {
             brand: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
               400: '#4ade80',
               500: '#22c55e',
               600: '#16a34a',
-              700: '#15803d',
-              900: '#14532d',
-              950: '#052e16',
             },
             accent: {
               electric: '#38bdf8',
@@ -58,31 +52,12 @@
   </script>
 
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0f172a;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #475569;
-    }
-
-    /* Pulse glow effect */
-    .glow-brand {
-      box-shadow: 0 0 20px -5px rgba(34, 197, 94, 0.4);
-    }
-
-    /* iOS Notch, Dynamic Island & Safe Area adjustments */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
     body {
       padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: max(6rem, env(safe-area-inset-bottom, 1rem));
+      padding-bottom: max(5.5rem, env(safe-area-inset-bottom, 1rem));
     }
   </style>
 </head>
@@ -224,14 +199,14 @@
         </div>
 
         <div class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 p-1 rounded-2xl text-xs">
-          <button onclick="setRoutineScopeFilter('personal')" id="filter-scope-personal" class="px-3 py-1.5 rounded-xl font-bold transition bg-brand-500 text-slate-950">
-            Le Mie Schede
+          <button onclick="setRoutineScopeFilter('all')" id="filter-scope-all" class="px-3 py-1.5 rounded-xl font-bold transition bg-brand-500 text-slate-950">
+            Tutte
+          </button>
+          <button onclick="setRoutineScopeFilter('personal')" id="filter-scope-personal" class="px-3 py-1.5 rounded-xl font-semibold transition text-slate-400 hover:text-white">
+            Le Mie Personali
           </button>
           <button onclick="setRoutineScopeFilter('templates')" id="filter-scope-templates" class="px-3 py-1.5 rounded-xl font-semibold transition text-slate-400 hover:text-white">
-            Template Base
-          </button>
-          <button onclick="setRoutineScopeFilter('all')" id="filter-scope-all" class="px-3 py-1.5 rounded-xl font-semibold transition text-slate-400 hover:text-white">
-            Tutte
+            Template Protetti
           </button>
         </div>
       </div>
@@ -286,25 +261,11 @@
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Frequenza Settimanale</label>
             <select id="aiDaysCount" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
-              <option value="2 Giorni (Full Body)">2 Giorni (Full Body)</option>
               <option value="3 Giorni (Push / Pull / Legs)" selected>3 Giorni (Push / Pull / Legs)</option>
               <option value="4 Giorni (Upper / Lower Split)">4 Giorni (Upper / Lower)</option>
-              <option value="5 Giorni (Bro Split / Priorità)">5 Giorni (Priorità Specifica - 5 Split)</option>
-              <option value="6 Giorni (Push / Pull / Legs × 2)">6 Giorni (Push / Pull / Legs × 2)</option>
+              <option value="2 Giorni (Full Body)">2 Giorni (Full Body)</option>
+              <option value="5 Giorni (Bro Split / Priorità)">5 Giorni (Priorità Specifica)</option>
             </select>
-          </div>
-
-          <div>
-            <div class="flex items-center justify-between mb-1.5">
-              <label class="block text-xs font-semibold uppercase text-slate-400">Chiave API Gemini (Opzionale)</label>
-              <button type="button" onclick="toggleApiKeyInput()" class="text-[10px] text-accent-electric hover:underline flex items-center gap-1 font-semibold">
-                <i class="fa-solid fa-key"></i> <span id="apiKeyBtnText">Configura</span>
-              </button>
-            </div>
-            <div id="apiKeyContainer" class="hidden space-y-1">
-              <input type="password" id="customApiKey" placeholder="Incolla chiave AIzaSy... (opzionale)" onchange="saveCustomApiKey(this.value)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:ring-2 focus:ring-brand-500">
-              <span class="text-[10px] text-slate-500 block">Senza chiave, il motore biomeccanico integrato genera la scheda su misura offline in pochi istanti.</span>
-            </div>
           </div>
 
           <div>
@@ -766,6 +727,22 @@
           <label class="block text-slate-400 font-semibold mb-1">Descrizione / Note Esecuzione</label>
           <input type="text" id="customExDesc" placeholder="Note tecniche..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
         </div>
+        <div>
+          <label class="block text-slate-400 font-semibold mb-1">Foto o Immagine Attrezzo (Opzionale)</label>
+          <div class="flex items-center gap-2">
+            <label class="cursor-pointer px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 hover:border-brand-500 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-camera text-accent-electric"></i>
+              <span id="customExImgLabel">Scegli o Scatta Foto</span>
+              <input type="file" id="customExImgInput" accept="image/*" class="hidden" onchange="handleNewCustomExerciseImage(this)">
+            </label>
+            <div id="customExImgPreview" class="hidden w-10 h-10 rounded-lg overflow-hidden border border-slate-700 bg-slate-950">
+              <img id="customExImgPreviewEl" src="" class="w-full h-full object-cover">
+            </div>
+            <button type="button" id="customExImgClearBtn" onclick="clearNewCustomExerciseImage()" class="hidden text-slate-500 hover:text-red-400 text-xs p-1" title="Rimuovi foto selezionata">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
       </div>
       <div class="flex justify-end gap-2 pt-2">
         <button onclick="closeAddExerciseModal()" class="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs">Annulla</button>
@@ -1126,11 +1103,28 @@
   <!-- ==================== JAVASCRIPT LOGIC ==================== -->
   <script>
     /* ========================================================
+       0. SAFE STORAGE & ISOLATION HELPERS (Zero Crash Policy)
+       ======================================================== */
+    const safeStorage = {
+      get: (key) => {
+        try { return localStorage.getItem(key); } catch (e) { return null; }
+      },
+      set: (key, val) => {
+        try { localStorage.setItem(key, val); } catch (e) {}
+      },
+      remove: (key) => {
+        try { localStorage.removeItem(key); } catch (e) {}
+      }
+    };
+
+    let isAppBooted = false;
+
+    /* ========================================================
        1. EXERCISE DATABASE INITIALIZATION
        ======================================================== */
     const DEFAULT_EXERCISES = [
       // PETTO
-      { id: 'ex_cp', name: 'Chest Press', muscle: 'Petto', defaultSets: 4, defaultReps: '8-10', defaultRest: 90, defaultWeight: 50, desc: 'Esercizio base guidato per pettorali, deltoidi anteriori e tricipiti con spinta controllata.' },
+      { id: 'ex_cp', name: 'Chest Press', muscle: 'Petto', defaultSets: 4, defaultReps: '8-10', defaultRest: 90, defaultWeight: 50, desc: 'Esercizio base guidato per pettorali (focus fascio sternale), deltoidi anteriori e tricipiti con spinta controllata.' },
       { id: 'ex_pf', name: 'Pec Fly', muscle: 'Petto', defaultSets: 3, defaultReps: '12-15', defaultRest: 60, defaultWeight: 35, desc: 'Isolamento pettorale su macchina per stimolare le fibre sterno-costali in massimo allungamento.' },
       { id: 'ex_icp', name: 'Incline Chest Press', muscle: 'Petto', defaultSets: 4, defaultReps: '8-10', defaultRest: 90, defaultWeight: 45, desc: 'Spinta su piano inclinato a 30-45° con enfasi sui fasci clavicolari del gran pettorale.' },
       { id: 'ex_croci_m', name: 'Croci Manubri', muscle: 'Petto', defaultSets: 3, defaultReps: '10-12', defaultRest: 75, defaultWeight: 14, desc: 'Aperture su panca piana o inclinata per un profondo stretch eccentrico dei pettorali.' },
@@ -1209,16 +1203,14 @@
     ];
 
     /* ========================================================
-       SISTEMA SESSIONI DI CARICO MULTIPLE & VALUTAZIONE (PULITO DA ZERO)
+       2. STATO IN-MEMORY SICURO
        ======================================================== */
     let exerciseLoadHistory = {};
     let workoutEvaluationsHistory = [];
-
     let currentModalTargetExId = null;
     let currentEvaluationPending = null;
     let selectedUserStars = 5;
 
-    // In-memory state
     let exercisesArchive = [...DEFAULT_EXERCISES];
     let userRoutines = [];
     let hiddenTemplateIds = [];
@@ -1234,26 +1226,32 @@
     let restTimerInterval = null;
     let restTimerRemaining = 0;
 
-    // Web Audio Sound FX for Rest Timer Beep
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    // Web Audio Sound FX (Lazy init per evitare blocchi audio policy)
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioClass) audioCtx = new AudioClass();
+      }
+      return audioCtx;
+    }
+
     function playBeep(frequency = 880, duration = 0.25, type = 'sine') {
       try {
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
         osc.type = type;
-        osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {
-        console.warn('Audio non abilitato', e);
-      }
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
     }
 
     function playTimerFinishedFanfare() {
@@ -1262,7 +1260,6 @@
       setTimeout(() => playBeep(783.99, 0.3), 300);
     }
 
-    /* Calcoli scientifici di valutazione */
     function calculate1RM(weight, reps) {
       const r = parseInt(reps) || 1;
       const w = parseFloat(weight) || 0;
@@ -1280,24 +1277,19 @@
       }, 0);
     }
 
-    /* ========================================================
-       SISTEMA MULTI-PROFILO E AMBIENTI ISOLATI
-       ======================================================== */
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'gympro-ai-trainer';
-    let db = null;
-    let auth = null;
-    let isCloudSyncActive = false;
+    /* Profilo e Identificativo Atleta */
+    let currentUserId = safeStorage.get('gympro_active_uid');
+    if (!currentUserId) {
+      currentUserId = 'atleta_' + Math.random().toString(36).substring(2, 9);
+      safeStorage.set('gympro_active_uid', currentUserId);
+    }
 
-    // Profilo e sessioni isolate
-    let currentUserId = 'atleta_' + Math.random().toString(36).substring(2, 10);
     let currentUserName = 'Mio Profilo (Principale)';
     let localProfiles = [
       { id: currentUserId, name: currentUserName, isDefault: true }
     ];
+    let routineScopeFilter = 'all';
 
-    let routineScopeFilter = 'personal'; // Default sulle schede personali per iniziare da zero
-
-    // Template base ufficiali protetti
     const SYSTEM_PROTECTED_TEMPLATES = [
       {
         id: 'tpl_split_3d',
@@ -1349,123 +1341,88 @@
 
     let userPersonalRoutines = [];
 
-    async function initCloudStorage() {
-      if (typeof __firebase_config === 'undefined') {
-        updateUserIdDisplay();
-        return;
-      }
-
-      try {
-        const { initializeApp } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js");
-        const { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js");
-        const { getFirestore, doc, setDoc, deleteDoc, collection, onSnapshot } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-
-        const firebaseConfig = JSON.parse(__firebase_config);
-        const app = initializeApp(firebaseConfig);
-        auth = getAuth(app);
-        db = getFirestore(app);
-
-        let userCred;
-        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-          userCred = await signInWithCustomToken(auth, __initial_auth_token);
-        } else {
-          userCred = await signInAnonymously(auth);
-        }
-
-        const user = userCred?.user || auth.currentUser;
-        if (!user) return;
-
-        currentUserId = user.uid;
-        isCloudSyncActive = true;
-        updateUserIdDisplay();
-
-        const userRoutinesCol = collection(db, 'artifacts', appId, 'users', currentUserId, 'routines');
-        onSnapshot(userRoutinesCol, (snapshot) => {
-          const list = [];
-          snapshot.forEach(docSnap => {
-            list.push({ id: docSnap.id, ...docSnap.data() });
-          });
-          userPersonalRoutines = list;
-          rebuildCombinedRoutines();
-        }, (error) => {
-          console.error("Errore sincronizzazione schede:", error);
-        });
-
-      } catch (err) {
-        console.warn("Storage cloud non attivo, modalità locale isolata:", err);
-        updateUserIdDisplay();
-      }
-    }
-
     function updateUserIdDisplay() {
       const el = document.getElementById('fullUserIdDisplay');
       if (el) el.innerText = currentUserId;
       const headerName = document.getElementById('headerAthleteName');
       if (headerName) headerName.innerText = currentUserName;
       const shareInput = document.getElementById('shareDirectLinkInput');
-      if (shareInput) shareInput.value = window.location.href;
+      if (shareInput) {
+        try {
+          shareInput.value = window.location.href || 'https://gympro.app';
+        } catch (e) {
+          shareInput.value = 'https://gympro.app';
+        }
+      }
       renderProfilesList();
     }
 
-    /* ========================================================
-       2. INITIAL ROUTINES & STORAGE
-       ======================================================== */
     function persistLocalData() {
-      try {
-        localStorage.setItem('gympro_user_routines_' + currentUserId, JSON.stringify(userPersonalRoutines));
-        localStorage.setItem('gympro_load_history_' + currentUserId, JSON.stringify(exerciseLoadHistory));
-        localStorage.setItem('gympro_evals_history_' + currentUserId, JSON.stringify(workoutEvaluationsHistory));
-        localStorage.setItem('gympro_custom_exercises', JSON.stringify(exercisesArchive.filter(e => e.id.startsWith('ex_custom_'))));
-        localStorage.setItem('gympro_hidden_templates_' + currentUserId, JSON.stringify(hiddenTemplateIds));
-      } catch (err) {
-        console.warn("Errore salvataggio localStorage:", err);
-      }
+      safeStorage.set('gympro_user_routines_' + currentUserId, JSON.stringify(userPersonalRoutines));
+      safeStorage.set('gympro_load_history_' + currentUserId, JSON.stringify(exerciseLoadHistory));
+      safeStorage.set('gympro_evals_history_' + currentUserId, JSON.stringify(workoutEvaluationsHistory));
+      safeStorage.set('gympro_custom_exercises', JSON.stringify(exercisesArchive.filter(e => e.id.startsWith('ex_custom_'))));
+      safeStorage.set('gympro_hidden_templates_' + currentUserId, JSON.stringify(hiddenTemplateIds));
     }
 
     function loadLocalData() {
-      try {
-        const savedCustom = localStorage.getItem('gympro_custom_exercises');
-        if (savedCustom) {
+      const savedCustom = safeStorage.get('gympro_custom_exercises');
+      if (savedCustom) {
+        try {
           const customArr = JSON.parse(savedCustom);
-          customArr.forEach(c => {
-            if (!exercisesArchive.some(e => e.id === c.id)) {
-              exercisesArchive.unshift(c);
-            }
-          });
-        }
-        const savedPersonal = localStorage.getItem('gympro_user_routines_' + currentUserId);
-        if (savedPersonal) {
-          // Rimuove eventuali schede starter demo residue per garantire la partenza da zero
-          userPersonalRoutines = JSON.parse(savedPersonal).filter(r => r.id !== 'routine_personal_starter');
-        } else {
-          userPersonalRoutines = [];
-        }
-        const savedLoads = localStorage.getItem('gympro_load_history_' + currentUserId);
-        if (savedLoads) {
-          exerciseLoadHistory = JSON.parse(savedLoads);
-        } else {
-          exerciseLoadHistory = {};
-        }
-        const savedEvals = localStorage.getItem('gympro_evals_history_' + currentUserId);
-        if (savedEvals) {
-          workoutEvaluationsHistory = JSON.parse(savedEvals);
-        } else {
-          workoutEvaluationsHistory = [];
-        }
-        const savedHidden = localStorage.getItem('gympro_hidden_templates_' + currentUserId);
-        if (savedHidden) {
-          hiddenTemplateIds = JSON.parse(savedHidden);
-        }
-      } catch (err) {
-        console.warn("Errore lettura localStorage:", err);
+          if (Array.isArray(customArr)) {
+            customArr.forEach(c => {
+              if (!exercisesArchive.some(e => e.id === c.id)) exercisesArchive.unshift(c);
+            });
+          }
+        } catch (e) {}
       }
+      const savedPersonal = safeStorage.get('gympro_user_routines_' + currentUserId);
+      if (savedPersonal) {
+        try {
+          const parsed = JSON.parse(savedPersonal);
+          if (Array.isArray(parsed)) userPersonalRoutines = parsed;
+        } catch (e) {}
+      }
+      const savedLoads = safeStorage.get('gympro_load_history_' + currentUserId);
+      if (savedLoads) {
+        try {
+          const parsedLoads = JSON.parse(savedLoads);
+          if (parsedLoads && typeof parsedLoads === 'object') exerciseLoadHistory = parsedLoads;
+        } catch (e) {}
+      }
+      const savedEvals = safeStorage.get('gympro_evals_history_' + currentUserId);
+      if (savedEvals) {
+        try {
+          const parsedEvals = JSON.parse(savedEvals);
+          if (Array.isArray(parsedEvals)) workoutEvaluationsHistory = parsedEvals;
+        } catch (e) {}
+      }
+      const savedHidden = safeStorage.get('gympro_hidden_templates_' + currentUserId);
+      if (savedHidden) {
+        try {
+          const parsedHidden = JSON.parse(savedHidden);
+          if (Array.isArray(parsedHidden)) hiddenTemplateIds = parsedHidden;
+        } catch (e) {}
+      }
+
+      // Recupero eventuali immagini personalizzate salvate per gli esercizi
+      exercisesArchive.forEach(ex => {
+        const customImg = safeStorage.get('gympro_ex_img_' + ex.id);
+        if (customImg) {
+          if (ex.id === 'ex_cp' && customImg.startsWith('data:image/svg+xml')) {
+            safeStorage.remove('gympro_ex_img_ex_cp');
+            delete ex.image;
+          } else {
+            ex.image = customImg;
+          }
+        }
+      });
     }
 
     function initDefaultRoutines() {
       loadLocalData();
-      if (!userPersonalRoutines) {
-        userPersonalRoutines = [];
-      }
+      if (!Array.isArray(userPersonalRoutines)) userPersonalRoutines = [];
       rebuildCombinedRoutines();
     }
 
@@ -1480,18 +1437,13 @@
       ['all', 'personal', 'templates'].forEach(s => {
         const btn = document.getElementById(`filter-scope-${s}`);
         if (!btn) return;
-        if (s === scope) {
-          btn.className = "px-3 py-1.5 rounded-xl font-bold transition bg-brand-500 text-slate-950";
-        } else {
-          btn.className = "px-3 py-1.5 rounded-xl font-semibold transition text-slate-400 hover:text-white";
-        }
+        btn.className = (s === scope)
+          ? "px-3 py-1.5 rounded-xl font-bold transition bg-brand-500 text-slate-950"
+          : "px-3 py-1.5 rounded-xl font-semibold transition text-slate-400 hover:text-white";
       });
       renderRoutinesList();
     }
 
-    /* ========================================================
-       CONDIVISIONE E GESTIONE MULTI-PROFILO
-       ======================================================== */
     function openShareModal() {
       updateUserIdDisplay();
       document.getElementById('shareAppModal').classList.remove('hidden');
@@ -1506,7 +1458,7 @@
       if (!input) return;
       input.select();
       document.execCommand('copy');
-      showToast('Link Copiato con Successo!', 'Condividi questo link con chi vuoi: aprendolo, ogni persona avrà il suo profilo privato per creare o generare le proprie schede senza toccare le tue.');
+      showToast('Link Copiato!', 'Ogni persona che apre il link ha il proprio profilo privato e schede isolate.');
     }
 
     function copyAthleteId() {
@@ -1516,27 +1468,22 @@
       dummy.select();
       document.execCommand('copy');
       document.body.removeChild(dummy);
-      showToast('ID Atleta Copiato!', 'Il tuo ID completo è stato copiato negli appunti.');
+      showToast('ID Atleta Copiato!', 'ID atleta copiato negli appunti.');
     }
 
     function renderProfilesList() {
       const container = document.getElementById('profilesListContainer');
       if (!container) return;
-
       container.innerHTML = localProfiles.map(p => {
         const isActive = p.id === currentUserId;
         return `
           <div class="flex items-center justify-between p-2.5 rounded-xl ${isActive ? 'bg-brand-500/10 border border-brand-500/30' : 'bg-slate-950 border border-slate-800'}">
             <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full ${isActive ? 'bg-brand-400 animate-pulse' : 'bg-slate-600'}"></span>
+              <span class="w-2 h-2 rounded-full ${isActive ? 'bg-brand-400' : 'bg-slate-600'}"></span>
               <span class="font-bold text-white text-xs">${p.name}</span>
               ${isActive ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-brand-500 text-slate-950 font-black uppercase">Attivo</span>' : ''}
             </div>
-            ${!isActive ? `
-              <button onclick="switchAthleteProfile('${p.id}')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200">
-                Usa
-              </button>
-            ` : ''}
+            ${!isActive ? `<button onclick="switchAthleteProfile('${p.id}')" class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200">Usa</button>` : ''}
           </div>
         `;
       }).join('');
@@ -1547,20 +1494,20 @@
       const newId = 'atleta_' + Math.random().toString(36).substring(2, 10);
       localProfiles.push({ id: newId, name: newName, isDefault: false });
       switchAthleteProfile(newId);
-      showToast('Nuovo Profilo Creato!', `Benvenuto ${newName}! Il tuo ambiente di allenamento è ora attivo e separato da tutti gli altri.`);
+      showToast('Nuovo Profilo Creato!', `Benvenuto ${newName}! Il tuo ambiente è ora attivo e separato.`);
     }
 
     function switchAthleteProfile(profileId) {
       const target = localProfiles.find(p => p.id === profileId);
       if (!target) return;
-
       currentUserId = target.id;
       currentUserName = target.name;
+      safeStorage.set('gympro_active_uid', currentUserId);
       userPersonalRoutines = [];
-      rebuildCombinedRoutines();
+      initDefaultRoutines();
       updateUserIdDisplay();
       closeShareModal();
-      showToast('Profilo Attivato', `Stai ora visualizzando lo spazio personale di: ${currentUserName}`);
+      showToast('Profilo Attivato', `Visualizzi: ${currentUserName}`);
     }
 
     function cloneTemplateRoutine(routineId) {
@@ -1570,7 +1517,7 @@
       const newCloned = {
         id: 'routine_p_' + Date.now(),
         name: `${tpl.name.replace('(Copia)', '')} (Mia)`,
-        description: `Copia personale personalizzabile derivata da ${tpl.name}`,
+        description: `Copia personale derivata da ${tpl.name}`,
         createdAt: new Date().toLocaleDateString('it-IT'),
         isProtectedTemplate: false,
         authorId: currentUserId,
@@ -1578,36 +1525,14 @@
       };
 
       userPersonalRoutines.unshift(newCloned);
-      syncSaveRoutineToCloud(newCloned);
       persistLocalData();
       rebuildCombinedRoutines();
       setRoutineScopeFilter('personal');
-      showToast('Scheda Clonata!', `"${newCloned.name}" è ora nel tuo spazio personale: puoi modificare esercizi, serie e carichi senza alterare il template originale.`);
+      showToast('Scheda Clonata!', `"${newCloned.name}" è ora nelle tue schede personali modificabili.`);
     }
 
-    async function syncSaveRoutineToCloud(routine) {
-      if (isCloudSyncActive && db && auth && auth.currentUser) {
-        try {
-          const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-          const ref = doc(db, 'artifacts', appId, 'users', currentUserId, 'routines', routine.id);
-          await setDoc(ref, routine);
-        } catch (e) {
-          console.error("Salvataggio su cloud fallito:", e);
-        }
-      }
-    }
-
-    async function syncDeleteRoutineFromCloud(routineId) {
-      if (isCloudSyncActive && db && auth && auth.currentUser) {
-        try {
-          const { doc, deleteDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-          const ref = doc(db, 'artifacts', appId, 'users', currentUserId, 'routines', routineId);
-          await deleteDoc(ref);
-        } catch (e) {
-          console.error("Eliminazione su cloud fallita:", e);
-        }
-      }
-    }
+    function syncSaveRoutineToCloud(routine) {}
+    function syncDeleteRoutineFromCloud(routineId) {}
 
     /* ========================================================
        4. ARCHIVIO ESERCIZI RENDERING & FILTERING
@@ -1662,9 +1587,26 @@
 
       container.innerHTML = filtered.map(ex => {
         const badgeColor = getMuscleBadgeColor(ex.muscle);
+        const hasCustomImage = !!ex.image;
         return `
           <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 flex flex-col justify-between transition-all duration-200 hover:-translate-y-0.5 shadow-md group">
             <div>
+              ${hasCustomImage ? `
+                <div class="w-full h-36 mb-3 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 relative cursor-pointer group-hover:border-brand-500/40 transition" onclick="previewExerciseImage('${ex.id}')" title="Visualizza o modifica foto">
+                  <img src="${ex.image}" alt="${ex.name}" class="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform duration-300">
+                  <span class="absolute bottom-1.5 right-1.5 bg-slate-900/90 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-md border border-slate-700 flex items-center gap-1">
+                    <i class="fa-solid fa-camera text-[9px] text-accent-electric"></i> Foto
+                  </span>
+                </div>
+              ` : `
+                <div class="w-full h-24 mb-3 rounded-xl bg-slate-950/70 border border-dashed border-slate-800 hover:border-brand-500/50 flex flex-col items-center justify-center cursor-pointer transition group-hover:bg-slate-950" onclick="previewExerciseImage('${ex.id}')" title="Aggiungi una foto per ${ex.name}">
+                  <div class="w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center text-slate-400 group-hover:text-brand-400 group-hover:bg-brand-500/10 transition mb-1">
+                    <i class="fa-solid fa-camera text-xs"></i>
+                  </div>
+                  <span class="text-[11px] text-slate-400 font-medium group-hover:text-brand-400 transition">+ Aggiungi Foto</span>
+                </div>
+              `}
+
               <div class="flex items-center justify-between gap-2 mb-2">
                 <span class="text-xs px-2.5 py-1 rounded-lg font-bold ${badgeColor}">
                   ${ex.muscle}
@@ -1680,8 +1622,11 @@
                   ` : ''}
                 </div>
               </div>
-              <h3 class="font-extrabold text-base text-white group-hover:text-brand-400 transition-colors">
-                ${ex.name}
+              <h3 class="font-extrabold text-base text-white group-hover:text-brand-400 transition-colors flex items-center justify-between">
+                <span>${ex.name}</span>
+                <button onclick="previewExerciseImage('${ex.id}')" class="text-xs ${hasCustomImage ? 'text-brand-400 hover:text-brand-300' : 'text-slate-500 hover:text-white'} p-1 transition" title="${hasCustomImage ? 'Vedi o Cambia Foto' : 'Aggiungi Foto'}">
+                  <i class="fa-solid fa-camera"></i>
+                </button>
               </h3>
               <p class="text-xs text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
                 ${ex.desc || 'Esercizio per lo sviluppo muscolare con sovraccarico mirato.'}
@@ -1760,29 +1705,17 @@
 
       if (displayedList.length === 0) {
         container.innerHTML = `
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-10 sm:p-14 text-center space-y-4">
-            <div class="w-16 h-16 rounded-2xl bg-slate-800/90 border border-slate-700 flex items-center justify-center text-brand-400 text-2xl mx-auto shadow-inner">
-              <i class="fa-solid fa-dumbbell"></i>
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-12 text-center space-y-4">
+            <div class="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-500 text-2xl mx-auto">
+              <i class="fa-solid fa-layer-group"></i>
             </div>
-            <div class="space-y-1">
-              <h3 class="text-xl font-black text-white">Nessuna Scheda Creata</h3>
-              <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
-                Il tuo spazio è completamente pulito e pronto. Puoi creare la tua prima scheda da zero selezionando gli esercizi dall'archivio o fartela generare istantaneamente dal Coach AI.
-              </p>
-            </div>
-            <div class="flex flex-wrap justify-center items-center gap-3 pt-3">
-              <button onclick="openCreateRoutineModal()" class="px-5 py-3 bg-brand-500 hover:bg-brand-400 text-slate-950 rounded-2xl font-bold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg shadow-brand-500/20 active:scale-95">
-                <i class="fa-solid fa-plus"></i>
-                <span>Crea Scheda da Zero</span>
-              </button>
-              <button onclick="switchTab('ai')" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-2xl font-semibold text-xs sm:text-sm border border-slate-700 transition flex items-center gap-2 active:scale-95">
-                <i class="fa-solid fa-wand-magic-sparkles text-accent-electric"></i>
-                <span>Genera con AI Coach</span>
-              </button>
-              <button onclick="setRoutineScopeFilter('templates')" class="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-accent-gold rounded-2xl font-semibold text-xs border border-slate-800 transition flex items-center gap-1.5">
-                <i class="fa-solid fa-clipboard-list"></i>
-                <span>Vedi Template Base</span>
-              </button>
+            <h3 class="text-lg font-bold text-white">Nessuna scheda in questa vista</h3>
+            <p class="text-xs text-slate-400 max-w-sm mx-auto">
+              Puoi clonare uno dei template protetti con 1 click o generare una nuova scheda personalizzata tramite il Coach AI.
+            </p>
+            <div class="flex justify-center gap-3 pt-2">
+              <button onclick="setRoutineScopeFilter('templates')" class="px-4 py-2 bg-brand-500 text-slate-950 rounded-xl font-bold text-xs">Vedi Template Base</button>
+              <button onclick="switchTab('ai')" class="px-4 py-2 bg-slate-800 text-slate-200 rounded-xl font-semibold text-xs border border-slate-700">Genera con AI</button>
             </div>
           </div>
         `;
@@ -2192,33 +2125,14 @@
     }
 
     function quickAddExerciseToRoutine(exerciseId) {
-      if (!userPersonalRoutines || userPersonalRoutines.length === 0) {
+      if (userRoutines.length === 0) {
         openCreateRoutineModal();
-        const ex = exercisesArchive.find(e => e.id === exerciseId);
-        if (ex && tempModalDays[0]) {
-          tempModalDays[0].exercises.push({
-            id: ex.id,
-            name: ex.name,
-            muscle: ex.muscle,
-            sets: ex.defaultSets,
-            reps: ex.defaultReps,
-            rest: ex.defaultRest,
-            weight: ex.defaultWeight,
-            notes: ''
-          });
-          renderModalDays();
-        }
-        showToast('Nuova Scheda', 'Crea la tua prima scheda: troverai già inserito l\'esercizio selezionato!');
         return;
       }
       const ex = exercisesArchive.find(e => e.id === exerciseId);
       if (!ex) return;
 
-      const targetRoutine = userPersonalRoutines[0];
-      if (!targetRoutine.days || targetRoutine.days.length === 0) {
-        targetRoutine.days = [{ dayName: 'Giorno 1', exercises: [] }];
-      }
-      targetRoutine.days[0].exercises.push({
+      userRoutines[0].days[0].exercises.push({
         id: ex.id,
         name: ex.name,
         muscle: ex.muscle,
@@ -2229,16 +2143,80 @@
         notes: ''
       });
 
-      syncSaveRoutineToCloud(targetRoutine);
-      persistLocalData();
-      rebuildCombinedRoutines();
-      showToast('Esercizio Aggiunto', `"${ex.name}" è stato aggiunto al primo giorno della scheda "${targetRoutine.name}".`);
+      renderRoutinesList();
+      showToast('Esercizio Aggiunto', `"${ex.name}" è stato aggiunto al primo giorno della scheda "${userRoutines[0].name}".`);
     }
 
     /* ========================================================
-       8. CUSTOM EXERCISE ARCHIVE MODAL
+       8. CUSTOM EXERCISE ARCHIVE MODAL & COMPRESSION
        ======================================================== */
+    let tempNewExerciseImage = null;
+
+    function compressAndProcessImage(file, callback) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const maxDim = 800;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+          callback(compressedDataUrl);
+        };
+        img.onerror = function() {
+          callback(e.target.result);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleNewCustomExerciseImage(inputEl) {
+      if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+      compressAndProcessImage(inputEl.files[0], function(dataUrl) {
+        tempNewExerciseImage = dataUrl;
+        const preview = document.getElementById('customExImgPreview');
+        const previewEl = document.getElementById('customExImgPreviewEl');
+        const label = document.getElementById('customExImgLabel');
+        const clearBtn = document.getElementById('customExImgClearBtn');
+        if (preview && previewEl) {
+          previewEl.src = dataUrl;
+          preview.classList.remove('hidden');
+        }
+        if (label) label.innerText = 'Foto Pronta';
+        if (clearBtn) clearBtn.classList.remove('hidden');
+      });
+    }
+
+    function clearNewCustomExerciseImage() {
+      tempNewExerciseImage = null;
+      const input = document.getElementById('customExImgInput');
+      if (input) input.value = '';
+      const preview = document.getElementById('customExImgPreview');
+      const label = document.getElementById('customExImgLabel');
+      const clearBtn = document.getElementById('customExImgClearBtn');
+      if (preview) preview.classList.add('hidden');
+      if (label) label.innerText = 'Scegli o Scatta Foto';
+      if (clearBtn) clearBtn.classList.add('hidden');
+    }
+
     function openAddExerciseModal() {
+      clearNewCustomExerciseImage();
       document.getElementById('customExName').value = '';
       document.getElementById('customExDesc').value = '';
       document.getElementById('addExerciseModal').classList.remove('hidden');
@@ -2270,8 +2248,14 @@
         defaultReps: reps,
         defaultRest: rest,
         defaultWeight: weight,
-        desc: desc || `Esercizio personalizzato per ${muscle}.`
+        desc: desc || `Esercizio personalizzato per ${muscle}.`,
+        image: tempNewExerciseImage || undefined
       };
+
+      if (tempNewExerciseImage) {
+        safeStorage.set('gympro_ex_img_' + newEx.id, tempNewExerciseImage);
+      }
+      clearNewCustomExerciseImage();
 
       exercisesArchive.unshift(newEx);
       persistLocalData();
@@ -2283,26 +2267,6 @@
     /* ========================================================
        9. AI COACH GENERATOR (GEMINI 3 FLASH)
        ======================================================== */
-    function saveCustomApiKey(key) {
-      localStorage.setItem('gympro_custom_api_key', key.trim());
-      updateApiKeyIndicator();
-    }
-
-    function toggleApiKeyInput() {
-      const el = document.getElementById('apiKeyContainer');
-      if (el) el.classList.toggle('hidden');
-    }
-
-    function updateApiKeyIndicator() {
-      const k = localStorage.getItem('gympro_custom_api_key') || '';
-      const input = document.getElementById('customApiKey');
-      const btnText = document.getElementById('apiKeyBtnText');
-      if (input && k) input.value = k;
-      if (btnText) {
-        btnText.innerText = k ? 'Chiave Salvata ✓' : 'Configura';
-      }
-    }
-
     async function fetchWithRetry(url, options, maxRetries = 3) {
       let delay = 1000;
       for (let attempt = 0; attempt < maxRetries; attempt++) {
@@ -2329,7 +2293,6 @@
       const daysCount = document.getElementById('aiDaysCount').value;
       const focus = document.getElementById('aiFocus').value.trim();
       const notes = document.getElementById('aiNotes').value.trim();
-      const numDays = parseInt(daysCount, 10) || 3;
 
       // UI Loading State
       document.getElementById('aiPlaceholderState').classList.add('hidden');
@@ -2339,48 +2302,46 @@
 
       const archiveNames = exercisesArchive.map(e => `${e.name} (${e.muscle})`).join(', ');
 
-      const savedKey = (document.getElementById('customApiKey')?.value || '').trim() || localStorage.getItem('gympro_custom_api_key') || '';
-
-      // Se non è inserita una chiave API cloud, usa direttamente il motore biomeccanico nativo
-      if (!savedKey) {
-        setTimeout(() => {
-          generateFallbackAIPattern(goal, level, daysCount, focus);
-          document.getElementById('aiLoadingState').classList.add('hidden');
-        }, 500);
-        return;
-      }
-
       const prompt = `Sei un Preparatore Atletico CSCS esperto in biomeccanica e programmazione dell'allenamento.
 Crea una scheda di allenamento altamente professionale con questi parametri:
 - Obiettivo: ${goal}
 - Livello Atleta: ${level}
 - Frequenza: ${daysCount}
-- Numero esatto di giornate di allenamento: DEVI GENERARE ESATTAMENTE ${numDays} GIORNATE DISTINTE (da Giorno 1 a Giorno ${numDays}).
 - Focus Gruppi Muscolari: ${focus || 'Equilibrato su tutto il corpo'}
 - Note e Limitazioni: ${notes || 'Nessuna'}
 
 Attingi prioritariamente a questo archivio di esercizi biomeccanici:
 ${archiveNames}
 
-REGOLE CRUCIALI E TASSATIVE:
-1. L'array "days" nel JSON DEVE CONTENERE ESATTAMENTE ${numDays} OGGETTI GIORNATA. Non generare 3 giorni se ne sono stati chiesti ${numDays}!
-2. Ogni giorno deve avere una selezione bilanciata di 5-7 esercizi con carichi progressivi, serie, ripetizioni e recuperi coerenti con l'obiettivo ${goal}.
-
 Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici speciali), con la seguente struttura:
 {
   "routineName": "Nome descrittivo della scheda",
-  "overview": "Sintesi strategica del programma (2-3 frasi sui principi biomeccanici adottati per i ${numDays} giorni)",
+  "overview": "Sintesi strategica del programma (2-3 frasi sui principi biomeccanici adottati)",
   "days": [
-    // Array con ESATTAMENTE ${numDays} oggetti giorno
+    {
+      "dayName": "Giorno 1: Titolo (es. Push - Petto & Spalle)",
+      "exercises": [
+        {
+          "name": "Nome Esercizio (es. Chest Press)",
+          "muscle": "Petto",
+          "sets": 4,
+          "reps": "8-10",
+          "rest": 90,
+          "weight": 50,
+          "notes": "Fermo al petto di 1s, eccentrica di 3s"
+        }
+      ]
+    }
   ]
 }`;
 
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${savedKey}`;
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
       try {
         const payload = {
           contents: [{ parts: [{ text: prompt }] }],
-          systemInstruction: { parts: [{ text: `Sei un coach di bodybuilding e scienze motorie. Rispondi solo in JSON valido. Genera esattamente ${numDays} giornate di allenamento distinte nell'array days.` }] },
+          systemInstruction: { parts: [{ text: "Sei un coach di bodybuilding e scienze motorie. Rispondi solo in JSON valido." }] },
           generationConfig: {
             responseMimeType: "application/json"
           }
@@ -2398,14 +2359,9 @@ Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici
         if (!jsonText) throw new Error('Risposta vuota da Gemini');
 
         const parsed = JSON.parse(jsonText);
-        if (!parsed.days || parsed.days.length !== numDays) {
-          console.warn(`L'AI ha restituito ${parsed.days?.length} giorni invece di ${numDays}. Utilizzo correzione biomeccanica.`);
-          generateFallbackAIPattern(goal, level, daysCount, focus);
-        } else {
-          renderAIGeneratedResult(parsed);
-        }
+        renderAIGeneratedResult(parsed);
       } catch (err) {
-        console.warn('Errore chiamata AI Gemini, generazione con motore biomeccanico:', err);
+        console.warn('Errore AI, utilizzo template di fallback:', err);
         generateFallbackAIPattern(goal, level, daysCount, focus);
       } finally {
         document.getElementById('aiLoadingState').classList.add('hidden');
@@ -2413,206 +2369,10 @@ Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici
     }
 
     function generateFallbackAIPattern(goal, level, daysCount, focus) {
-      const numDays = parseInt(daysCount, 10) || 3;
-      let generatedDays = [];
-
-      if (numDays === 2) {
-        generatedDays = [
-          {
-            dayName: 'Giorno 1: Full Body A (Spinta & Quadricipiti)',
-            exercises: [
-              { name: 'Hack Squat', muscle: 'Quadricipiti', sets: 4, reps: '8-10', rest: 120, weight: 80, notes: 'Squat guidato profondo' },
-              { name: 'Chest Press', muscle: 'Petto', sets: 4, reps: '8-10', rest: 90, weight: 50, notes: 'Fermo al petto 1s' },
-              { name: 'Lat Machine', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 55, notes: 'Trazione controllata' },
-              { name: 'Shoulder Press', muscle: 'Spalle', sets: 3, reps: '10-12', rest: 90, weight: 40, notes: 'Spinta sopra la testa' },
-              { name: 'Leg Extension', muscle: 'Quadricipiti', sets: 3, reps: '12-15', rest: 60, weight: 45, notes: 'Picco di contrazione' },
-              { name: 'Push Down Vulken', muscle: 'Tricipiti', sets: 3, reps: '12', rest: 60, weight: 25, notes: 'Lockout completo' },
-              { name: 'Crunch su Fitball', muscle: 'Addome', sets: 3, reps: '15-20', rest: 60, weight: 0, notes: 'Ampia escursione' }
-            ]
-          },
-          {
-            dayName: 'Giorno 2: Full Body B (Trazione & Catena Posteriore)',
-            exercises: [
-              { name: 'Stacco Rumeno (RDL)', muscle: 'Femorali', sets: 4, reps: '8-10', rest: 90, weight: 70, notes: 'Cerniera anca controllata' },
-              { name: 'Spinte con Manubri', muscle: 'Petto', sets: 4, reps: '8-10', rest: 90, weight: 24, notes: 'Discesa profonda' },
-              { name: 'Rematore con Bilanciere', muscle: 'Dorsali', sets: 4, reps: '8', rest: 90, weight: 60, notes: 'Tirata all\'ombelico' },
-              { name: 'Alzate Laterali', muscle: 'Spalle', sets: 4, reps: '12-15', rest: 60, weight: 10, notes: 'Gomiti alti' },
-              { name: 'Leg Curl', muscle: 'Femorali', sets: 3, reps: '12', rest: 75, weight: 40, notes: 'Flessione pura' },
-              { name: 'Curl Ez', muscle: 'Bicipiti', sets: 3, reps: '10-12', rest: 60, weight: 28, notes: 'Presa sagomata' },
-              { name: 'AB Roll', muscle: 'Addome', sets: 3, reps: '10-12', rest: 75, weight: 0, notes: 'Core compatto' }
-            ]
-          }
-        ];
-      } else if (numDays === 4) {
-        generatedDays = [
-          {
-            dayName: 'Giorno 1: Upper A (Focus Petto & Spalle)',
-            exercises: [
-              { name: 'Chest Press', muscle: 'Petto', sets: 4, reps: '8-10', rest: 90, weight: 55, notes: 'Focus carico progressivo' },
-              { name: 'Incline Chest Press', muscle: 'Petto', sets: 3, reps: '10-12', rest: 90, weight: 45, notes: 'Fascio clavicolare' },
-              { name: 'Lat Machine Neutra', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 55, notes: 'Presa neutra' },
-              { name: 'Shoulder Press', muscle: 'Spalle', sets: 4, reps: '8-10', rest: 90, weight: 40, notes: 'Spinta verticale' },
-              { name: 'Alzate Laterali', muscle: 'Spalle', sets: 4, reps: '12-15', rest: 60, weight: 10, notes: 'Tensione continua' },
-              { name: 'Push Down Vulken', muscle: 'Tricipiti', sets: 3, reps: '10-12', rest: 60, weight: 25, notes: 'Isolamento tricipiti' }
-            ]
-          },
-          {
-            dayName: 'Giorno 2: Lower A (Focus Quadricipiti & Addome)',
-            exercises: [
-              { name: 'Hack Squat', muscle: 'Quadricipiti', sets: 4, reps: '8-10', rest: 120, weight: 85, notes: 'Discesa profonda' },
-              { name: 'Leg Extension', muscle: 'Quadricipiti', sets: 3, reps: '12-15', rest: 60, weight: 45, notes: 'Contrazione di picco 1s' },
-              { name: 'Leg Curl', muscle: 'Femorali', sets: 4, reps: '10-12', rest: 75, weight: 40, notes: 'Eccentrica 3 secondi' },
-              { name: 'Abductor Machine', muscle: 'Adduttori', sets: 3, reps: '15', rest: 60, weight: 40, notes: 'Stabilità bacino' },
-              { name: 'Crunch su Fitball', muscle: 'Addome', sets: 3, reps: '15-20', rest: 60, weight: 0, notes: 'Flessione controllata' },
-              { name: 'Tapis Roulant', muscle: 'Cardio', sets: 1, reps: '15 min', rest: 0, weight: 0, notes: 'Defaticamento aerobico' }
-            ]
-          },
-          {
-            dayName: 'Giorno 3: Upper B (Focus Dorsali & Braccia)',
-            exercises: [
-              { name: 'T-Bar largo', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 50, notes: 'Spessore e romboidi' },
-              { name: 'Lat Machine', muscle: 'Dorsali', sets: 3, reps: '10-12', rest: 75, weight: 50, notes: 'Ampiezza gran dorsale' },
-              { name: 'Pec Fly', muscle: 'Petto', sets: 4, reps: '12-15', rest: 60, weight: 35, notes: 'Stretch toracico' },
-              { name: 'Rear Delt', muscle: 'Spalle', sets: 3, reps: '15', rest: 60, weight: 30, notes: 'Deltoidi posteriori' },
-              { name: 'Curl Ez', muscle: 'Bicipiti', sets: 4, reps: '8-10', rest: 75, weight: 30, notes: 'Braccia piene' },
-              { name: 'French Press', muscle: 'Tricipiti', sets: 3, reps: '10-12', rest: 75, weight: 28, notes: 'Capo lungo tricipite' }
-            ]
-          },
-          {
-            dayName: 'Giorno 4: Lower B (Focus Catena Posteriore & Core)',
-            exercises: [
-              { name: 'Pressa 45°', muscle: 'Quadricipiti', sets: 4, reps: '10-12', rest: 90, weight: 140, notes: 'Spinta forte di gambe' },
-              { name: 'Squat Bulgaro', muscle: 'Quadricipiti', sets: 3, reps: '10 per gamba', rest: 90, weight: 16, notes: 'Lavoro unilaterale' },
-              { name: 'Leg Curl Seduto', muscle: 'Femorali', sets: 4, reps: '10-12', rest: 75, weight: 45, notes: 'Stretch bicipite femorale' },
-              { name: 'Shrugs', muscle: 'Trapezi', sets: 4, reps: '12-15', rest: 60, weight: 26, notes: 'Trapezio superiore' },
-              { name: 'AB Roll', muscle: 'Addome', sets: 3, reps: '10-12', rest: 75, weight: 0, notes: 'Anti-estensione core' },
-              { name: 'Crunch al cavo', muscle: 'Addome', sets: 3, reps: '12-15', rest: 60, weight: 30, notes: 'Sovraccarico addominale' }
-            ]
-          }
-        ];
-      } else if (numDays === 5) {
-        generatedDays = [
-          {
-            dayName: 'Giorno 1: Petto & Addominali',
-            exercises: [
-              { name: 'Chest Press', muscle: 'Petto', sets: 4, reps: '8-10', rest: 90, weight: 55, notes: 'Sovraccarico base' },
-              { name: 'Incline Chest Press', muscle: 'Petto', sets: 4, reps: '8-10', rest: 90, weight: 45, notes: 'Petto alto' },
-              { name: 'Croci Manubri', muscle: 'Petto', sets: 3, reps: '10-12', rest: 75, weight: 14, notes: 'Stretch e pump' },
-              { name: 'Pec Fly', muscle: 'Petto', sets: 3, reps: '12-15', rest: 60, weight: 35, notes: 'Squeeze finale' },
-              { name: 'Crunch al cavo', muscle: 'Addome', sets: 4, reps: '12-15', rest: 60, weight: 30, notes: 'Tensione continua' },
-              { name: 'AB Roll', muscle: 'Addome', sets: 3, reps: '10-12', rest: 75, weight: 0, notes: 'Tenuta isometrica' }
-            ]
-          },
-          {
-            dayName: 'Giorno 2: Schiena (Dorsali & Trapezi)',
-            exercises: [
-              { name: 'Lat Machine', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 55, notes: 'Ampiezza' },
-              { name: 'T-Bar largo', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 50, notes: 'Spessore centro schiena' },
-              { name: 'Low Row', muscle: 'Dorsali', sets: 3, reps: '10-12', rest: 75, weight: 50, notes: 'Dorsali bassi' },
-              { name: 'Lat Machine Neutra', muscle: 'Dorsali', sets: 3, reps: '12', rest: 60, weight: 50, notes: 'Massima contrazione' },
-              { name: 'Shrugs', muscle: 'Trapezi', sets: 4, reps: '12-15', rest: 60, weight: 28, notes: 'Scrollate verticali' }
-            ]
-          },
-          {
-            dayName: 'Giorno 3: Spalle & Cardio',
-            exercises: [
-              { name: 'Shoulder Press', muscle: 'Spalle', sets: 4, reps: '8-10', rest: 90, weight: 45, notes: 'Spinta pesante deltoidi' },
-              { name: 'Alzate Laterali', muscle: 'Spalle', sets: 4, reps: '12-15', rest: 60, weight: 12, notes: 'Isolamento laterale' },
-              { name: 'Rear Delt', muscle: 'Spalle', sets: 4, reps: '15', rest: 60, weight: 30, notes: 'Deltoidi posteriori' },
-              { name: 'Alzate posteriori', muscle: 'Spalle', sets: 3, reps: '12-15', rest: 60, weight: 8, notes: 'Cuffia e stabilità' },
-              { name: 'Tapis Roulant', muscle: 'Cardio', sets: 1, reps: '20 min', rest: 0, weight: 0, notes: 'Cardio continuo' }
-            ]
-          },
-          {
-            dayName: 'Giorno 4: Gambe (Quadricipiti, Femorali, Adduttori)',
-            exercises: [
-              { name: 'Hack Squat', muscle: 'Quadricipiti', sets: 4, reps: '8-10', rest: 120, weight: 85, notes: 'Accosciata solida' },
-              { name: 'Pressa 45°', muscle: 'Quadricipiti', sets: 4, reps: '10-12', rest: 90, weight: 150, notes: 'Spinta pesante' },
-              { name: 'Squat Bulgaro', muscle: 'Quadricipiti', sets: 3, reps: '10 per gamba', rest: 90, weight: 16, notes: 'Controllo ginocchio' },
-              { name: 'Leg Extension', muscle: 'Quadricipiti', sets: 3, reps: '12-15', rest: 60, weight: 45, notes: 'Bruciore e pump' },
-              { name: 'Leg Curl', muscle: 'Femorali', sets: 4, reps: '10-12', rest: 75, weight: 40, notes: 'Flessori femorali' },
-              { name: 'Abductor Machine', muscle: 'Adduttori', sets: 3, reps: '15', rest: 60, weight: 40, notes: 'Chiusura anca' }
-            ]
-          },
-          {
-            dayName: 'Giorno 5: Braccia (Bicipiti & Tricipiti) & Core',
-            exercises: [
-              { name: 'Curl Ez', muscle: 'Bicipiti', sets: 4, reps: '8-10', rest: 75, weight: 30, notes: 'Bicipiti pesanti' },
-              { name: 'French Press', muscle: 'Tricipiti', sets: 4, reps: '8-10', rest: 75, weight: 28, notes: 'Capo lungo' },
-              { name: 'Curl Panca 45°', muscle: 'Bicipiti', sets: 3, reps: '10-12', rest: 60, weight: 12, notes: 'Allungamento' },
-              { name: 'Push Down Vulken', muscle: 'Tricipiti', sets: 4, reps: '10-12', rest: 60, weight: 25, notes: 'Capo laterale' },
-              { name: 'Curl Machine', muscle: 'Bicipiti', sets: 3, reps: '12-15', rest: 60, weight: 30, notes: 'Isolamento totale' },
-              { name: 'Dip su Panca', muscle: 'Tricipiti', sets: 3, reps: '12-15', rest: 60, weight: 0, notes: 'Cedimento finale' },
-              { name: 'Crunch su Fitball', muscle: 'Addome', sets: 3, reps: '15-20', rest: 60, weight: 0, notes: 'Core wash' }
-            ]
-          }
-        ];
-      } else if (numDays === 6) {
-        generatedDays = [
-          {
-            dayName: 'Giorno 1: Push A (Focus Petto & Tricipiti)',
-            exercises: [
-              { name: 'Chest Press', muscle: 'Petto', sets: 4, reps: '6-8', rest: 90, weight: 60, notes: 'Spinta pesante' },
-              { name: 'Incline Chest Press', muscle: 'Petto', sets: 4, reps: '8-10', rest: 90, weight: 45, notes: 'Clavicolare' },
-              { name: 'Pec Fly', muscle: 'Petto', sets: 3, reps: '12-15', rest: 60, weight: 35, notes: 'Pump' },
-              { name: 'Alzate Laterali', muscle: 'Spalle', sets: 4, reps: '12-15', rest: 60, weight: 10, notes: 'Laterale' },
-              { name: 'Push Down Vulken', muscle: 'Tricipiti', sets: 4, reps: '10-12', rest: 60, weight: 25, notes: 'Tricipiti' }
-            ]
-          },
-          {
-            dayName: 'Giorno 2: Pull A (Focus Ampiezza Dorso & Bicipiti)',
-            exercises: [
-              { name: 'Lat Machine', muscle: 'Dorsali', sets: 4, reps: '6-8', rest: 90, weight: 60, notes: 'Trazione verticale' },
-              { name: 'Low Row', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 50, notes: 'Spessore' },
-              { name: 'Shrugs', muscle: 'Trapezi', sets: 3, reps: '12-15', rest: 60, weight: 26, notes: 'Trapezi' },
-              { name: 'Rear Delt', muscle: 'Spalle', sets: 3, reps: '15', rest: 60, weight: 30, notes: 'Posteriore' },
-              { name: 'Curl Ez', muscle: 'Bicipiti', sets: 4, reps: '8-10', rest: 75, weight: 30, notes: 'Bicipiti' }
-            ]
-          },
-          {
-            dayName: 'Giorno 3: Legs A (Focus Quadricipiti & Addome)',
-            exercises: [
-              { name: 'Hack Squat', muscle: 'Quadricipiti', sets: 4, reps: '6-8', rest: 120, weight: 90, notes: 'Squat pesante' },
-              { name: 'Pressa 45°', muscle: 'Quadricipiti', sets: 4, reps: '10-12', rest: 90, weight: 150, notes: 'Volume gambe' },
-              { name: 'Leg Extension', muscle: 'Quadricipiti', sets: 3, reps: '12-15', rest: 60, weight: 45, notes: 'Isolamento' },
-              { name: 'Abductor Machine', muscle: 'Adduttori', sets: 3, reps: '15', rest: 60, weight: 40, notes: 'Adduttori' },
-              { name: 'Crunch su Fitball', muscle: 'Addome', sets: 3, reps: '15-20', rest: 60, weight: 0, notes: 'Addome' }
-            ]
-          },
-          {
-            dayName: 'Giorno 4: Push B (Focus Spalle & Pettorali)',
-            exercises: [
-              { name: 'Shoulder Press', muscle: 'Spalle', sets: 4, reps: '6-8', rest: 90, weight: 45, notes: 'Spinta pesante' },
-              { name: 'Alzate Laterali', muscle: 'Spalle', sets: 4, reps: '12-15', rest: 60, weight: 10, notes: 'Volume laterali' },
-              { name: 'Croci Manubri', muscle: 'Petto', sets: 4, reps: '10-12', rest: 75, weight: 16, notes: 'Aperture' },
-              { name: 'French Press', muscle: 'Tricipiti', sets: 4, reps: '8-10', rest: 75, weight: 28, notes: 'Capo lungo' },
-              { name: 'Dip su Panca', muscle: 'Tricipiti', sets: 3, reps: '12-15', rest: 60, weight: 0, notes: 'Pump tricipiti' }
-            ]
-          },
-          {
-            dayName: 'Giorno 5: Pull B (Focus Spessore Schiena & Bicipiti)',
-            exercises: [
-              { name: 'T-Bar largo', muscle: 'Dorsali', sets: 4, reps: '8-10', rest: 90, weight: 50, notes: 'Remata pesante' },
-              { name: 'Lat Machine Neutra', muscle: 'Dorsali', sets: 4, reps: '10-12', rest: 75, weight: 50, notes: 'Contrazione' },
-              { name: 'Alzate posteriori', muscle: 'Spalle', sets: 4, reps: '12-15', rest: 60, weight: 8, notes: 'Deltoidi post' },
-              { name: 'Curl Panca 45°', muscle: 'Bicipiti', sets: 3, reps: '10-12', rest: 60, weight: 12, notes: 'Allungamento' },
-              { name: 'Curl Machine', muscle: 'Bicipiti', sets: 3, reps: '12', rest: 60, weight: 30, notes: 'Isolamento braccia' }
-            ]
-          },
-          {
-            dayName: 'Giorno 6: Legs B & Core (Focus Femorali & Cardio)',
-            exercises: [
-              { name: 'Squat Bulgaro', muscle: 'Quadricipiti', sets: 4, reps: '10 per gamba', rest: 90, weight: 16, notes: 'Unilaterale' },
-              { name: 'Leg Curl', muscle: 'Femorali', sets: 4, reps: '10-12', rest: 75, weight: 40, notes: 'Femorali' },
-              { name: 'Squat Isometrico', muscle: 'Quadricipiti', sets: 3, reps: '45-60 sec', rest: 60, weight: 0, notes: 'Resistenza' },
-              { name: 'AB Roll', muscle: 'Addome', sets: 3, reps: '10-12', rest: 75, weight: 0, notes: 'Core' },
-              { name: 'Tapis Roulant', muscle: 'Cardio', sets: 1, reps: '20 min', rest: 0, weight: 0, notes: 'Cardio finale' }
-            ]
-          }
-        ];
-      } else {
-        // Default 3 Giorni (Push / Pull / Legs)
-        generatedDays = [
+      const fallbackRoutine = {
+        routineName: `Scheda ${goal} Smart (${daysCount})`,
+        overview: `Programma ad alta efficacia biomeccanica formulato per ${level}. Include split Push/Pull/Legs con sovraccarico progressivo e target primario su ${focus || 'tutti i principali distretti muscolari'}.`,
+        days: [
           {
             dayName: 'Giorno 1: Spinta (Petto, Spalle, Tricipiti, Addome)',
             exercises: [
@@ -2649,15 +2409,8 @@ Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici
               { name: 'Crunch al cavo', muscle: 'Addome', sets: 4, reps: '12-15', rest: 60, weight: 30, notes: 'Carico progressivo' }
             ]
           }
-        ];
-      }
-
-      const fallbackRoutine = {
-        routineName: `Scheda ${goal} Smart (${daysCount})`,
-        overview: `Programma ad alta efficacia biomeccanica strutturato su ${numDays} giornate per livello ${level}. Ottimizzato con sovraccarico graduale, rotazione degli stimoli e target prioritario su: ${focus || 'tutti i principali distretti muscolari'}.`,
-        days: generatedDays
+        ]
       };
-
       renderAIGeneratedResult(fallbackRoutine);
     }
 
@@ -2820,25 +2573,37 @@ Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici
       listContainer.innerHTML = activeSession.exercises.map((ex, exIdx) => {
         const pastSessions = exerciseLoadHistory[ex.id] || [];
         const pastSessionsCount = pastSessions.length;
+        const exArchiveData = exercisesArchive.find(e => e.id === ex.id);
+        const exImg = exArchiveData?.image || ex.image;
 
         return `
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
-            <div>
-              <div class="flex items-center gap-2">
-                <h3 class="font-extrabold text-base text-white">${ex.name}</h3>
-                <span class="text-[10px] px-2 py-0.5 rounded ${getMuscleBadgeColor(ex.muscle)}">${ex.muscle}</span>
-                ${pastSessionsCount > 0 ? `
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-accent-gold/15 text-accent-gold font-mono font-bold">
-                    Sessione #${pastSessionsCount + 1}
-                  </span>
-                ` : ''}
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0 cursor-pointer hover:border-brand-500/50 flex flex-col items-center justify-center transition" onclick="previewExerciseImage('${ex.id}')" title="${exImg ? 'Vedi o Cambia foto esercizio' : 'Aggiungi foto per questo esercizio'}">
+                ${exImg ? `
+                  <img src="${exImg}" alt="${ex.name}" class="w-full h-full object-contain p-0.5 rounded-lg">
+                ` : `
+                  <i class="fa-solid fa-camera text-slate-500 hover:text-brand-400 text-base"></i>
+                  <span class="text-[8px] text-slate-500 mt-0.5">+ Foto</span>
+                `}
               </div>
-              <div class="flex items-center gap-2 mt-1">
-                ${ex.notes ? `<span class="text-xs text-slate-400 italic">${ex.notes}</span> · ` : ''}
-                <button onclick="openExerciseLoadModal('${ex.id}')" class="text-[11px] text-accent-electric hover:underline flex items-center gap-1 font-semibold">
-                  <i class="fa-solid fa-clock-rotate-left"></i> Storico Carichi (${pastSessionsCount} sessioni)
-                </button>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-extrabold text-base text-white">${ex.name}</h3>
+                  <span class="text-[10px] px-2 py-0.5 rounded ${getMuscleBadgeColor(ex.muscle)}">${ex.muscle}</span>
+                  ${pastSessionsCount > 0 ? `
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-accent-gold/15 text-accent-gold font-mono font-bold">
+                      Sessione #${pastSessionsCount + 1}
+                    </span>
+                  ` : ''}
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                  ${ex.notes ? `<span class="text-xs text-slate-400 italic">${ex.notes}</span> · ` : ''}
+                  <button onclick="openExerciseLoadModal('${ex.id}')" class="text-[11px] text-accent-electric hover:underline flex items-center gap-1 font-semibold">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Storico Carichi (${pastSessionsCount} sessioni)
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -3041,7 +2806,129 @@ Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici
     }
 
     /* ========================================================
-       11. SISTEMA DI VALUTAZIONE & FINE SESSIONE WORKOUT
+       MODALE VISUALIZZAZIONE & INSERIMENTO FOTO ESERCIZIO
+       ======================================================== */
+    function previewExerciseImage(exerciseId) {
+      const ex = exercisesArchive.find(e => e.id === exerciseId);
+      if (!ex) return;
+
+      const hasCustomImage = !!ex.image;
+      const isCustomUploaded = !!safeStorage.get('gympro_ex_img_' + ex.id);
+
+      const modalHtml = `
+        <div id="exerciseImagePreviewModal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/90 backdrop-blur-md">
+          <div class="bg-slate-900 border border-slate-700 w-full max-w-2xl rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl relative max-h-[92vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div>
+                <span class="text-xs uppercase text-brand-400 font-bold block">${ex.muscle}</span>
+                <h3 class="text-lg sm:text-xl font-black text-white">${ex.name} - Foto ed Esecuzione</h3>
+              </div>
+              <button onclick="closeExerciseImagePreview()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <!-- Immagine Esercizio o Box Vuoto -->
+            ${hasCustomImage ? `
+              <div class="bg-slate-950 rounded-2xl p-2 sm:p-3 border border-slate-800 flex items-center justify-center overflow-hidden flex-1 min-h-[220px]">
+                <img src="${ex.image}" alt="${ex.name}" class="w-full h-auto max-h-[50vh] object-contain rounded-xl">
+              </div>
+            ` : `
+              <div class="bg-slate-950 rounded-2xl p-8 border border-dashed border-slate-800 flex flex-col items-center justify-center text-center space-y-3 flex-1 min-h-[220px]">
+                <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-brand-400 text-2xl">
+                  <i class="fa-solid fa-camera"></i>
+                </div>
+                <div>
+                  <h4 class="text-base font-bold text-white">Nessuna foto associata</h4>
+                  <p class="text-xs text-slate-400 mt-1 max-w-sm">
+                    Scatta una foto all'attrezzo in palestra o carica un'immagine dalla galleria per ricordarti la corretta impostazione e postura.
+                  </p>
+                </div>
+                <label class="cursor-pointer px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-brand-500/20 transition active:scale-95">
+                  <i class="fa-solid fa-camera"></i>
+                  <span>Scatta o Carica Foto</span>
+                  <input type="file" accept="image/*" class="hidden" onchange="uploadCustomExerciseImage('${ex.id}', this)">
+                </label>
+              </div>
+            `}
+
+            <!-- Dettaglio Biomeccanico e Descrizione -->
+            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 space-y-2 text-xs">
+              <div class="text-slate-300 leading-relaxed">
+                ${ex.desc || 'Esercizio per lo sviluppo muscolare con sovraccarico mirato.'}
+              </div>
+              <div class="pt-1 flex flex-wrap gap-1.5 text-[10px] text-slate-400 font-mono">
+                <span class="px-2 py-0.5 rounded bg-brand-500/10 text-brand-400 border border-brand-500/20 font-bold">Fascia: ${ex.muscle}</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Serie base: ${ex.defaultSets}</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Reps: ${ex.defaultReps}</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Recupero: ${ex.defaultRest}s</span>
+              </div>
+            </div>
+
+            <!-- Controlli Immagine & Chiusura -->
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800">
+              <div class="flex items-center gap-2">
+                <label class="cursor-pointer px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 flex items-center gap-1.5 transition active:scale-95">
+                  <i class="fa-solid fa-camera text-accent-electric"></i>
+                  <span>${hasCustomImage ? 'Cambia Foto' : 'Carica Foto'}</span>
+                  <input type="file" accept="image/*" class="hidden" onchange="uploadCustomExerciseImage('${ex.id}', this)">
+                </label>
+                ${hasCustomImage ? `
+                  <button onclick="deleteExerciseImage('${ex.id}')" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-red-500/20 text-slate-400 hover:text-red-400 text-xs font-semibold border border-slate-700 transition" title="Elimina foto">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>Rimuovi Foto</span>
+                  </button>
+                ` : ''}
+              </div>
+
+              <button onclick="closeExerciseImagePreview()" class="px-5 py-2 bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold rounded-xl text-xs transition active:scale-95">
+                Chiudi
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const existing = document.getElementById('exerciseImagePreviewModal');
+      if (existing) existing.remove();
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+
+    function closeExerciseImagePreview() {
+      const modal = document.getElementById('exerciseImagePreviewModal');
+      if (modal) modal.remove();
+    }
+
+    function uploadCustomExerciseImage(exerciseId, inputEl) {
+      if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+      const file = inputEl.files[0];
+      compressAndProcessImage(file, function(dataUrl) {
+        const ex = exercisesArchive.find(x => x.id === exerciseId);
+        if (ex) {
+          ex.image = dataUrl;
+          safeStorage.set('gympro_ex_img_' + exerciseId, dataUrl);
+          renderExercisesArchive();
+          if (activeSession) renderActiveSessionView();
+          previewExerciseImage(exerciseId);
+          showToast('Foto Aggiornata!', `La foto dell'esercizio "${ex.name}" è stata salvata.`);
+        }
+      });
+    }
+
+    function deleteExerciseImage(exerciseId) {
+      const ex = exercisesArchive.find(x => x.id === exerciseId);
+      if (!ex) return;
+      safeStorage.remove('gympro_ex_img_' + exerciseId);
+      delete ex.image;
+      renderExercisesArchive();
+      if (activeSession) renderActiveSessionView();
+      previewExerciseImage(exerciseId);
+      showToast('Foto Rimossa', `La foto di "${ex.name}" è stata rimossa.`);
+    }
+
+    /* ========================================================
+       11. COMPLETAMENTO WORKOUT & VALUTAZIONE SCIENTIFICA
        ======================================================== */
     function finishActiveSession() {
       if (!activeSession) return;
@@ -3057,13 +2944,12 @@ Rispondi ESCLUSIVAMENTE in formato JSON puro (senza markdown di contorno o apici
           totalSets++;
           const w = parseFloat(s.weight) || 0;
           const r = parseInt(s.reps) || 0;
-          const est = calculate1RM(w, r);
-          if (est > peak1RM) peak1RM = est;
-
           if (s.completed) {
             completedSets++;
             totalTonnage += (w * r);
             totalRpe += (parseFloat(s.rpe) || 8);
+            const est = calculate1RM(w, r);
+            if (est > peak1RM) peak1RM = est;
           }
         });
       });
@@ -3672,13 +3558,13 @@ Fornisci in 3-4 frasi chiare:
     function resetAllAppData() {
       showCustomConfirm(
         'RESET COMPLETO DI FABBRICA',
-        'ATTENZIONE: Verranno eliminate definitivamente tutte le schede personali, lo storico di tutti i carichi, tutte le valutazioni e gli esercizi personalizzati. Vuoi davvero resettare tutto?',
+        'ATTENZIONE: Verranno eliminate definitivamente tutte le schede personali, lo storico carichi e le valutazioni. Vuoi procedere?',
         () => {
-          localStorage.removeItem('gympro_user_routines_' + currentUserId);
-          localStorage.removeItem('gympro_load_history_' + currentUserId);
-          localStorage.removeItem('gympro_evals_history_' + currentUserId);
-          localStorage.removeItem('gympro_custom_exercises');
-          localStorage.removeItem('gympro_hidden_templates_' + currentUserId);
+          safeStorage.remove('gympro_user_routines_' + currentUserId);
+          safeStorage.remove('gympro_load_history_' + currentUserId);
+          safeStorage.remove('gympro_evals_history_' + currentUserId);
+          safeStorage.remove('gympro_custom_exercises');
+          safeStorage.remove('gympro_hidden_templates_' + currentUserId);
 
           userPersonalRoutines = [];
           exerciseLoadHistory = {};
@@ -3691,7 +3577,7 @@ Fornisci in 3-4 frasi chiare:
           renderExercisesArchive();
           renderValutazioniTab();
           switchTab('schede');
-          showToast('Reset Eseguito', 'Tutti i dati sono stati cancellati e l\'app è stata riportata allo stato iniziale pulito.');
+          showToast('Reset Eseguito', 'Tutti i dati sono stati azzerati con successo.');
         }
       );
     }
@@ -3731,7 +3617,7 @@ Fornisci in 3-4 frasi chiare:
     }
 
     /* ========================================================
-       15. GESTIONE TAB E NAVIGAZIONE (DESKTOP & MOBILE BAR)
+       15. GESTIONE TAB E AVVIO PROTETTO (Zero Freeze)
        ======================================================== */
     let currentActiveTab = 'schede';
 
@@ -3745,51 +3631,56 @@ Fornisci in 3-4 frasi chiare:
         const mobBtn = document.getElementById(`mob-nav-${t}`);
 
         if (content) {
-          if (t === tabId) {
-            content.classList.remove('hidden');
-          } else {
-            content.classList.add('hidden');
-          }
+          if (t === tabId) content.classList.remove('hidden');
+          else content.classList.add('hidden');
         }
 
         if (navBtn) {
-          if (t === tabId) {
-            navBtn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 bg-slate-800 text-brand-400 border border-slate-700 shadow-sm";
-          } else {
-            navBtn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent";
-          }
+          navBtn.className = (t === tabId)
+            ? "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 bg-slate-800 text-brand-400 border border-slate-700 shadow-sm"
+            : "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent";
         }
 
         if (mobBtn) {
-          if (t === tabId) {
-            mobBtn.className = "mob-tab-btn flex flex-col items-center text-brand-400 text-xs font-bold py-1 transition-all duration-150 scale-105 active:scale-95 touch-manipulation cursor-pointer";
-          } else {
-            mobBtn.className = "mob-tab-btn flex flex-col items-center text-slate-400 hover:text-slate-200 text-xs font-medium py-1 transition-all duration-150 active:scale-95 touch-manipulation cursor-pointer";
-          }
+          mobBtn.className = (t === tabId)
+            ? "mob-tab-btn flex flex-col items-center text-brand-400 text-xs font-bold py-1 transition-all duration-150 scale-105 active:scale-95 touch-manipulation cursor-pointer"
+            : "mob-tab-btn flex flex-col items-center text-slate-400 hover:text-slate-200 text-xs font-medium py-1 transition-all duration-150 active:scale-95 touch-manipulation cursor-pointer";
         }
       });
 
-      if (tabId === 'schede') {
-        renderRoutinesList();
-      } else if (tabId === 'archivio') {
-        renderExercisesArchive();
-      } else if (tabId === 'valutazioni') {
-        renderValutazioniTab();
-      } else if (tabId === 'activeSession') {
-        renderActiveSessionView();
-      }
+      if (tabId === 'schede') renderRoutinesList();
+      else if (tabId === 'archivio') renderExercisesArchive();
+      else if (tabId === 'valutazioni') renderValutazioniTab();
+      else if (tabId === 'activeSession') renderActiveSessionView();
 
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      try {
+        window.scrollTo(0, 0);
+      } catch (e) {}
     }
 
-    window.onload = function () {
-      initDefaultRoutines();
-      initCloudStorage();
-      renderMuscleFilterChips();
-      renderExercisesArchive();
-      updateApiKeyIndicator();
-      switchTab('schede');
-    };
+    function bootApp() {
+      if (isAppBooted) return;
+      isAppBooted = true;
+
+      try {
+        initDefaultRoutines();
+        renderMuscleFilterChips();
+        renderExercisesArchive();
+        switchTab('schede');
+        updateUserIdDisplay();
+      } catch (err) {
+        console.warn("Avvio safe-mode:", err);
+        const tab = document.getElementById('tab-content-schede');
+        if (tab) tab.classList.remove('hidden');
+      }
+    }
+
+    // Inizializzazione pulita singola garantita
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootApp);
+    } else {
+      bootApp();
+    }
   </script>
 </body>
 </html>
